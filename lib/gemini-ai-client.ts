@@ -53,6 +53,7 @@ export class GeminiAIClient implements AIClient {
 
     return streamText({
       model: google('gemini-3.1-flash-lite-preview'),
+      maxRetries: 3,
       system: prompt,
       messages: [
         {
@@ -63,6 +64,9 @@ export class GeminiAIClient implements AIClient {
           ],
         },
       ],
+      onError: ({ error }) => {
+        throw new Error(`Failed to prompt: ${error}`);
+      },
     });
   }
 }

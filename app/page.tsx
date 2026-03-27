@@ -6,6 +6,7 @@ import Header from '@/components/Header';
 import ErrorTopBar from '@/components/ErrorTopBar';
 import FileUploader from '@/components/FileUploader';
 import MarkdownPreview from '@/components/MarkdownPreview';
+import { randomizeFilename } from '@/lib/utils';
 
 export default function Home() {
   const [error, setError] = useState<string | null>(null);
@@ -16,19 +17,13 @@ export default function Home() {
     api: '/api/analyze',
     streamProtocol: 'text',
     onError: (err) => {
-      setError(err.message || 'Failed to analyze the image.');
-      setIsUploading(false); // Just in case it was stuck
+      console.log(`Error analyzing image: ${err.message}`)
+      setError(err.message.includes('Failed to fetch') ? 'Failed to analyze the image.' : err.message);
+      setIsUploading(false);
     },
   });
 
-  useEffect(() => {
-    const imageMatch = completion.match(/!\[[^\]]*]\(([^)]+)\)/);
-    // #region agent log
-    fetch('http://127.0.0.1:7425/ingest/e40e11f2-6139-4b3c-b89b-b0abe6c5943d',{method:'POST',headers:{'Content-Type':'application/json','X-Debug-Session-Id':'c5235c'},body:JSON.stringify({sessionId:'c5235c',runId:'public-blob-image-debug',hypothesisId:'C3',location:'app/page.tsx:28',message:'Completion updated with first markdown image URL',data:{completionLength:completion.length,firstImageUrl:imageMatch?imageMatch[1]:null},timestamp:Date.now()})}).catch(()=>{});
-    // #endregion
-  }, [completion]);
-
-  const handleFileSelect = async (file: File) => {
+  const handleUploadFile = async (file: File) => {
     setError(null);
     setIsUploading(true);
     setCompletion(''); // Reset markdown
@@ -47,7 +42,8 @@ export default function Home() {
       });
 
       // Upload to Vercel Blob via our endpoint
-      const response = await fetch(`/api/upload?filename=${encodeURIComponent(file.name)}`, {
+      const newFilename = randomizeFilename(file.name);
+      const response = await fetch(`/api/upload?filename=${encodeURIComponent(newFilename)}`, {
         method: 'POST',
         body: file,
       });
@@ -58,9 +54,6 @@ export default function Home() {
       }
 
       const blobData = await response.json();
-      // #region agent log
-      fetch('http://127.0.0.1:7425/ingest/e40e11f2-6139-4b3c-b89b-b0abe6c5943d',{method:'POST',headers:{'Content-Type':'application/json','X-Debug-Session-Id':'c5235c'},body:JSON.stringify({sessionId:'c5235c',runId:'public-blob-image-debug',hypothesisId:'C2',location:'app/page.tsx:62',message:'Client received blob response',data:{blobUrl:typeof blobData?.url==='string'?blobData.url:null},timestamp:Date.now()})}).catch(()=>{});
-      // #endregion
 
       // Trigger Gemini streaming
       setIsUploading(false);
@@ -88,7 +81,7 @@ export default function Home() {
           </div>
           <div className="p-6 flex-1 flex flex-col justify-center items-center overflow-auto">
             {!imageUrl ? (
-              <FileUploader onFileSelect={handleFileSelect} isUploading={isUploading} />
+              <FileUploader onFileSelect={handleUploadFile} isUploading={isUploading} />
             ) : (
               <div className="relative w-full h-full min-h-[250px] flex flex-col items-center justify-center">
                 {/* eslint-disable-next-line @next/next/no-img-element */}

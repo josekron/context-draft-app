@@ -13,8 +13,8 @@ export async function POST(req: Request) {
 
     const result = await aiClient.getContextDraftStream(imageUrl, imageBase64);
     return result.toTextStreamResponse();
-  } catch (error: unknown) {
-    console.error('Error analyzing image:', error);
+  } catch (error) {
+    console.error('Caught Error in Route:', error);
     // Vercel AI SDK useCompletion parses the text body of a >=400 response as the thrown error message.
     const msg = error instanceof Error ? error.message : 'Failed to analyze image';
     return new Response(msg, { status: 500 });
