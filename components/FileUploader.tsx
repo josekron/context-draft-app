@@ -49,7 +49,7 @@ export default function FileUploader({ onFileSelect, isUploading }: FileUploader
       className={`border-2 border-dashed rounded-xl p-12 text-center transition-all duration-200 ${
         isDragging
           ? 'border-accent bg-accent/5 scale-[1.02]'
-          : 'border-slate-300 hover:border-slate-400 bg-surface'
+          : 'border-border hover:border-accent bg-surface'
       } ${isUploading ? 'opacity-50 pointer-events-none' : 'cursor-pointer'}`}
       onDragOver={handleDragOver}
       onDragLeave={handleDragLeave}
@@ -66,15 +66,16 @@ export default function FileUploader({ onFileSelect, isUploading }: FileUploader
       <label htmlFor="file-upload" className="flex flex-col items-center cursor-pointer w-full h-full">
         <UploadCloud
           size={48}
-          className={`mb-4 transition-colors ${isDragging ? 'text-[var(--color-accent)]' : 'text-slate-400'}`}
+          className={`mb-4 transition-colors ${isDragging ? 'text-accent' : 'text-slate-400 dark:text-slate-500'}`}
         />
         <p className="text-lg font-medium text-primary mb-1">
           Drag & drop your screenshot here
         </p>
-        <p className="text-sm text-slate-500">
+        <p className="text-sm text-slate-500 dark:text-slate-400">
           or click to browse from your computer
         </p>
       </label>
     </div>
+
   );
 }

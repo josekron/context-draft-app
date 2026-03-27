@@ -1,7 +1,7 @@
 'use client';
 
 import { useCompletion } from '@ai-sdk/react';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Header from '@/components/Header';
 import ErrorTopBar from '@/components/ErrorTopBar';
 import FileUploader from '@/components/FileUploader';
@@ -67,14 +67,14 @@ export default function Home() {
   };
 
   return (
-    <main className="h-screen bg-slate-100 flex flex-col font-sans overflow-hidden">
+    <main className="h-screen bg-slate-50 dark:bg-slate-950 flex flex-col font-sans overflow-hidden transition-colors">
       <Header />
       <ErrorTopBar message={error} onClose={() => setError(null)} />
 
       <div className="flex-1 w-full max-w-[1400px] mx-auto p-4 md:p-6 lg:p-8 flex flex-col lg:flex-row gap-6 overflow-hidden">
         {/* Left Column: Image / Uploader */}
-        <section className="flex-1 lg:max-w-md xl:max-w-lg flex flex-col h-full bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden shrink-0">
-          <div className="px-5 py-3 border-b border-slate-200 bg-surface">
+        <section className="flex-1 lg:max-w-md xl:max-w-lg flex flex-col h-full bg-white dark:bg-slate-900 rounded-xl shadow-sm border border-border overflow-hidden shrink-0 transition-colors">
+          <div className="px-5 py-3 border-b border-border bg-surface">
             <h2 className="font-semibold text-primary text-sm flex items-center gap-2">
               Image Source
             </h2>
@@ -88,11 +88,11 @@ export default function Home() {
                 <img
                   src={imageUrl}
                   alt="Uploaded preview"
-                  className={`max-h-[500px] w-auto max-w-full object-contain rounded-lg shadow-sm border border-slate-200 transition-opacity ${isUploading ? 'opacity-50' : 'opacity-100'
+                  className={`max-h-[500px] w-auto max-w-full object-contain rounded-lg shadow-sm border border-border transition-opacity ${isUploading ? 'opacity-50' : 'opacity-100'
                     }`}
                 />
                 {isUploading && (
-                  <div className="absolute inset-0 flex items-center justify-center bg-white/40 rounded-lg">
+                  <div className="absolute inset-0 flex items-center justify-center bg-white/40 dark:bg-slate-900/40 rounded-lg">
                     <span className="bg-primary text-white text-sm font-medium px-4 py-2 rounded-full shadow-lg animate-pulse">
                       Uploading to Vercel Blob...
                     </span>
@@ -107,7 +107,7 @@ export default function Home() {
                       setCompletion('');
                       setError(null);
                     }}
-                    className="mt-6 px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 text-sm font-medium rounded-lg transition-colors border border-slate-200 shadow-sm"
+                    className="mt-6 px-4 py-2 bg-surface text-foreground hover:bg-slate-100 dark:hover:bg-slate-800 text-sm font-medium rounded-lg transition-colors border border-border shadow-sm"
                   >
                     Upload a different screenshot
                   </button>
