@@ -107,7 +107,7 @@ export default function Home() {
                       setCompletion('');
                       setError(null);
                     }}
-                    className="mt-6 px-4 py-2 bg-surface text-foreground hover:bg-slate-100 dark:hover:bg-slate-800 text-sm font-medium rounded-lg transition-colors border border-border shadow-sm"
+                    className="mt-6 px-4 py-2 bg-surface text-foreground hover:bg-hover text-sm font-medium rounded-lg transition-colors border border-border shadow-sm"
                   >
                     Upload a different screenshot
                   </button>

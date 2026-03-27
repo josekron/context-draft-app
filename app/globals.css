@@ -5,11 +5,12 @@
 .light {
   --app-bg: #FFFFFF;
   --app-fg: #171717;
-  --app-muted: #64748B;
+  --app-muted: #475569;
   --app-primary: #0F172A;
   --app-accent: #2563EB;
   --app-surface: #F8FAFC;
   --app-border: #E2E8F0;
+  --app-hover: #F1F5F9;
 }
 
 .dark,
@@ -21,6 +22,7 @@
   --app-accent: #3B82F6;
   --app-surface: #0F172A;
   --app-border: #1E293B;
+  --app-hover: #1E293B;
 }
 
 @theme inline {
@@ -31,6 +33,7 @@
   --color-accent: var(--app-accent);
   --color-surface: var(--app-surface);
   --color-border: var(--app-border);
+  --color-hover: var(--app-hover);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }

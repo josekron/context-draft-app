@@ -50,7 +50,7 @@ export default function MarkdownPreview({ content, isLoading, error }: MarkdownP
           <button
             onClick={handleCopy}
             disabled={!content}
-            className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-primary hover:bg-slate-100 dark:hover:bg-slate-800 rounded-md transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-muted hover:text-primary hover:bg-hover rounded-md transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             title="Copy to clipboard"
           >
             {copied ? <Check size={14} className="text-green-600" /> : <Copy size={14} />}
@@ -59,7 +59,7 @@ export default function MarkdownPreview({ content, isLoading, error }: MarkdownP
           <button
             onClick={handleDownload}
             disabled={!content}
-            className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-primary hover:bg-slate-100 dark:hover:bg-slate-800 rounded-md transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-muted hover:text-primary hover:bg-hover rounded-md transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             title="Download .md file"
           >
             <Download size={14} />
@@ -73,16 +73,16 @@ export default function MarkdownPreview({ content, isLoading, error }: MarkdownP
           <ReactMarkdown 
             remarkPlugins={[remarkGfm]}
             components={{
-              h1: ({node, ...props}) => <h1 className="text-2xl font-bold mb-4 mt-6 text-primary transition-colors" {...props} />,
-              h2: ({node, ...props}) => <h2 className="text-xl font-bold mb-3 mt-5 text-primary tracking-tight transition-colors" {...props} />,
-              h3: ({node, ...props}) => <h3 className="text-lg font-bold mb-2 mt-4 text-primary transition-colors" {...props} />,
-              h4: ({node, ...props}) => <h4 className="text-base font-bold mb-2 mt-3 text-primary transition-colors" {...props} />,
-              p: ({node, ...props}) => <p className="mb-4 text-slate-700 dark:text-slate-300 leading-relaxed text-[15px] transition-colors" {...props} />,
-              ul: ({node, ...props}) => <ul className="list-disc pl-6 mb-4 text-slate-700 dark:text-slate-300 space-y-1 transition-colors" {...props} />,
-              ol: ({node, ...props}) => <ol className="list-decimal pl-6 mb-4 text-slate-700 dark:text-slate-300 space-y-1 transition-colors" {...props} />,
-              li: ({node, ...props}) => <li className="text-[15px]" {...props} />,
+              h1: ({node, ...props}) => <h1 className="text-2xl font-bold mb-4 mt-6 text-foreground transition-colors" {...props} />,
+              h2: ({node, ...props}) => <h2 className="text-xl font-bold mb-3 mt-5 text-foreground tracking-tight transition-colors" {...props} />,
+              h3: ({node, ...props}) => <h3 className="text-lg font-bold mb-2 mt-4 text-foreground transition-colors" {...props} />,
+              h4: ({node, ...props}) => <h4 className="text-base font-bold mb-2 mt-3 text-foreground transition-colors" {...props} />,
+              p: ({node, ...props}) => <p className="mb-4 text-foreground leading-relaxed text-[15px] transition-colors" {...props} />,
+              ul: ({node, ...props}) => <ul className="list-disc pl-6 mb-4 text-foreground space-y-1 transition-colors" {...props} />,
+              ol: ({node, ...props}) => <ol className="list-decimal pl-6 mb-4 text-foreground space-y-1 transition-colors" {...props} />,
+              li: ({node, ...props}) => <li className="text-[15px] text-foreground" {...props} />,
               a: ({node, ...props}) => <a className="text-accent hover:underline font-medium transition-colors" {...props} />,
-              blockquote: ({node, ...props}) => <blockquote className="border-l-4 border-border pl-4 py-1 my-4 italic text-slate-600 dark:text-slate-400 bg-surface rounded-r-lg" {...props} />,
+              blockquote: ({node, ...props}) => <blockquote className="border-l-4 border-border pl-4 py-1 my-4 italic text-foreground bg-surface rounded-r-lg" {...props} />,
               code: ({node, className, children, ...props}) => {
                 const match = /language-(\w+)/.exec(className || '')
                 return match ? (
@@ -110,7 +110,7 @@ export default function MarkdownPreview({ content, isLoading, error }: MarkdownP
             {content}
           </ReactMarkdown>
         ) : (
-          <div className="h-full flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 italic space-y-2">
+          <div className="h-full flex flex-col items-center justify-center text-muted italic space-y-2">
             {error && !isLoading ? (
               <p className="text-red-500 font-medium">Failed to generate draft. Please try again.</p>
             ) : (
