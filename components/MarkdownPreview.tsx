@@ -35,7 +35,7 @@ export default function MarkdownPreview({ content, isLoading, error }: MarkdownP
   };
 
   return (
-    <div className="flex flex-col h-full bg-white dark:bg-slate-900 rounded-xl shadow-sm border border-border overflow-hidden transition-colors">
+    <div className="flex flex-col h-full bg-background rounded-xl shadow-sm border border-border overflow-hidden transition-colors duration-300">
       <div className="flex items-center justify-between px-5 py-3 border-b border-border bg-surface">
         <div className="font-semibold text-primary text-sm flex items-center gap-2 transition-colors">
           Markdown Output
@@ -68,7 +68,7 @@ export default function MarkdownPreview({ content, isLoading, error }: MarkdownP
         </div>
       </div>
       
-      <div className="flex-1 overflow-auto p-6 bg-white dark:bg-slate-900 min-h-[300px] transition-colors">
+      <div className="flex-1 overflow-auto p-6 bg-background min-h-[300px] transition-colors duration-300">
         {content ? (
           <ReactMarkdown 
             remarkPlugins={[remarkGfm]}
@@ -82,21 +82,22 @@ export default function MarkdownPreview({ content, isLoading, error }: MarkdownP
               ol: ({node, ...props}) => <ol className="list-decimal pl-6 mb-4 text-slate-700 dark:text-slate-300 space-y-1 transition-colors" {...props} />,
               li: ({node, ...props}) => <li className="text-[15px]" {...props} />,
               a: ({node, ...props}) => <a className="text-accent hover:underline font-medium transition-colors" {...props} />,
-              blockquote: ({node, ...props}) => <blockquote className="border-l-4 border-slate-300 dark:border-slate-700 pl-4 py-1 my-4 italic text-slate-600 dark:text-slate-400 bg-slate-50 dark:bg-slate-800/50 rounded-r-lg" {...props} />,
+              blockquote: ({node, ...props}) => <blockquote className="border-l-4 border-border pl-4 py-1 my-4 italic text-slate-600 dark:text-slate-400 bg-surface rounded-r-lg" {...props} />,
               code: ({node, className, children, ...props}) => {
                 const match = /language-(\w+)/.exec(className || '')
                 return match ? (
-                  <pre className="bg-slate-900 text-slate-50 p-4 rounded-lg overflow-x-auto mb-4 text-sm font-mono shadow-sm">
+                  <pre className="bg-slate-100 dark:bg-slate-950 text-slate-900 dark:text-slate-50 p-4 rounded-lg overflow-x-auto mb-4 text-sm font-mono shadow-sm border border-border">
                     <code className={className} {...props}>
                       {children}
                     </code>
                   </pre>
                 ) : (
-                  <code className="bg-slate-100 dark:bg-slate-800 text-accent px-1.5 py-0.5 rounded text-sm font-mono transition-colors" {...props}>
+                  <code className="bg-surface text-accent px-1.5 py-0.5 rounded text-sm font-mono transition-colors" {...props}>
                     {children}
                   </code>
                 )
               },
+
               img: ({node, ...props}) => (
                 <img
                   className="max-w-full rounded-xl mb-4 border border-border shadow-sm"

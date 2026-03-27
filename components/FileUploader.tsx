@@ -66,15 +66,16 @@ export default function FileUploader({ onFileSelect, isUploading }: FileUploader
       <label htmlFor="file-upload" className="flex flex-col items-center cursor-pointer w-full h-full">
         <UploadCloud
           size={48}
-          className={`mb-4 transition-colors ${isDragging ? 'text-accent' : 'text-slate-400 dark:text-slate-500'}`}
+          className={`mb-4 transition-colors ${isDragging ? 'text-accent' : 'text-muted'}`}
         />
         <p className="text-lg font-medium text-primary mb-1">
           Drag & drop your screenshot here
         </p>
-        <p className="text-sm text-slate-500 dark:text-slate-400">
+        <p className="text-sm text-muted">
           or click to browse from your computer
         </p>
       </label>
+
     </div>
 
   );

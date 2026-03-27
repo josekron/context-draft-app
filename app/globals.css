@@ -5,6 +5,7 @@
 .light {
   --app-bg: #FFFFFF;
   --app-fg: #171717;
+  --app-muted: #64748B;
   --app-primary: #0F172A;
   --app-accent: #2563EB;
   --app-surface: #F8FAFC;
@@ -15,6 +16,7 @@
 [data-theme='dark'] {
   --app-bg: #020617;
   --app-fg: #EDEDED;
+  --app-muted: #94A3B8;
   --app-primary: #F8FAFC;
   --app-accent: #3B82F6;
   --app-surface: #0F172A;
@@ -24,6 +26,7 @@
 @theme inline {
   --color-background: var(--app-bg);
   --color-foreground: var(--app-fg);
+  --color-muted: var(--app-muted);
   --color-primary: var(--app-primary);
   --color-accent: var(--app-accent);
   --color-surface: var(--app-surface);

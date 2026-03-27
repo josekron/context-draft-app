@@ -67,13 +67,13 @@ export default function Home() {
   };
 
   return (
-    <main className="h-screen bg-slate-50 dark:bg-slate-950 flex flex-col font-sans overflow-hidden transition-colors">
+    <main className="h-screen bg-background flex flex-col font-sans overflow-hidden transition-colors duration-300">
       <Header />
       <ErrorTopBar message={error} onClose={() => setError(null)} />
 
       <div className="flex-1 w-full max-w-[1400px] mx-auto p-4 md:p-6 lg:p-8 flex flex-col lg:flex-row gap-6 overflow-hidden">
         {/* Left Column: Image / Uploader */}
-        <section className="flex-1 lg:max-w-md xl:max-w-lg flex flex-col h-full bg-white dark:bg-slate-900 rounded-xl shadow-sm border border-border overflow-hidden shrink-0 transition-colors">
+        <section className="flex-1 lg:max-w-md xl:max-w-lg flex flex-col h-full bg-background rounded-xl shadow-sm border border-border overflow-hidden shrink-0 transition-colors duration-300">
           <div className="px-5 py-3 border-b border-border bg-surface">
             <h2 className="font-semibold text-primary text-sm flex items-center gap-2">
               Image Source
@@ -92,7 +92,7 @@ export default function Home() {
                     }`}
                 />
                 {isUploading && (
-                  <div className="absolute inset-0 flex items-center justify-center bg-white/40 dark:bg-slate-900/40 rounded-lg">
+                  <div className="absolute inset-0 flex items-center justify-center bg-background/50 backdrop-blur-[1px] rounded-lg">
                     <span className="bg-primary text-white text-sm font-medium px-4 py-2 rounded-full shadow-lg animate-pulse">
                       Uploading to Vercel Blob...
                     </span>
