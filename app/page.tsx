@@ -104,8 +104,9 @@ export default function Home() {
                     }`}
                 />
                 {isUploading && (
-                  <div className="absolute inset-0 flex items-center justify-center bg-background/50 backdrop-blur-[1px] rounded-lg">
-                    <span className="bg-primary text-white text-sm font-medium px-4 py-2 rounded-full shadow-lg animate-pulse">
+                  <div className="absolute inset-0 flex items-center justify-center bg-background/60 backdrop-blur-sm rounded-lg">
+                    <span className="bg-accent text-white text-sm font-semibold px-5 py-2.5 rounded-full shadow-xl animate-pulse flex items-center gap-2 border border-white/10">
+                      <div className="w-2 h-2 bg-white rounded-full animate-bounce" />
                       Uploading to Vercel Blob...
                     </span>
                   </div>
