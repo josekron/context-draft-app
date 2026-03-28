@@ -43,17 +43,29 @@ export default function Home() {
 
       // Upload to Vercel Blob via our endpoint
       const newFilename = randomizeFilename(file.name);
+      console.log(`Uploading file: ${newFilename}`);
+      
       const response = await fetch(`/api/upload?filename=${encodeURIComponent(newFilename)}`, {
         method: 'POST',
         body: file,
       });
 
       if (!response.ok) {
-        console.error(await response.text());
-        throw new Error('Failed to upload image. Please try again.');
+        let errorMessage = 'Failed to upload image. Please try again.';
+        try {
+          const errorData = await response.json();
+          errorMessage = errorData.error || errorMessage;
+        } catch {
+          // If response is not JSON, use text or default message
+          const textError = await response.text();
+          errorMessage = textError || errorMessage;
+        }
+        console.error('Upload failed:', errorMessage);
+        throw new Error(errorMessage);
       }
 
       const blobData = await response.json();
+      console.log('Upload successful:', blobData.url);
 
       // Trigger Gemini streaming
       setIsUploading(false);

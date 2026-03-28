@@ -14,13 +14,19 @@ export async function POST(request: Request): Promise<NextResponse> {
   }
 
   try {
-    const blob = await put(filename, request.body, {
+    const blobFile = await request.blob();
+    const result = await put(filename, blobFile, {
       access: 'public',
     });
 
-    return NextResponse.json(blob);
+    throw new Error('wwrwr')
+
+    return NextResponse.json(result);
   } catch (error) {
     console.error('Error uploading to Vercel Blob:', error);
-    return NextResponse.json({ error: 'Failed to upload' }, { status: 500 });
+    return NextResponse.json(
+      { error: error instanceof Error ? error.message : 'Failed to upload' },
+      { status: 500 }
+    );
   }
 }
