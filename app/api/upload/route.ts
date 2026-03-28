@@ -19,8 +19,6 @@ export async function POST(request: Request): Promise<NextResponse> {
       access: 'public',
     });
 
-    throw new Error('wwrwr')
-
     return NextResponse.json(result);
   } catch (error) {
     console.error('Error uploading to Vercel Blob:', error);
