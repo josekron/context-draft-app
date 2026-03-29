@@ -47,7 +47,7 @@ export default function Home() {
       // Upload to Vercel Blob via our endpoint
       const newFilename = randomizeFilename(file.name);
       console.log(`Uploading file: ${newFilename}`);
-      
+
       const response = await fetch(`/api/upload?filename=${encodeURIComponent(newFilename)}`, {
         method: 'POST',
         body: file,
@@ -89,13 +89,13 @@ export default function Home() {
   };
 
   return (
-    <main className="h-screen bg-background flex flex-col font-sans overflow-hidden transition-colors duration-300">
+    <main className="min-h-screen lg:h-screen bg-background flex flex-col font-sans lg:overflow-hidden transition-colors duration-300">
       <Header />
       <ErrorTopBar message={error} onClose={() => setError(null)} />
 
-      <div className="flex-1 w-full max-w-[1400px] mx-auto p-4 md:p-6 lg:p-8 flex flex-col lg:flex-row gap-6 overflow-hidden">
+      <div className="flex-1 w-full max-w-[1400px] mx-auto p-4 md:p-6 lg:p-8 flex flex-col lg:flex-row gap-8 lg:overflow-hidden">
         {/* Left Column: Image / Uploader */}
-        <section className="flex-1 lg:max-w-md xl:max-w-lg flex flex-col h-full bg-background rounded-xl shadow-sm border border-border overflow-hidden shrink-0 transition-colors duration-300">
+        <section className="flex-none lg:flex-1 lg:max-w-md xl:max-w-lg flex flex-col lg:h-full bg-background rounded-xl shadow-sm border border-border lg:overflow-hidden transition-colors duration-300">
           <div className="px-5 py-3 border-b border-border bg-surface shrink-0">
             <h2 className="font-semibold text-primary text-sm flex items-center gap-2">
               Image Source
@@ -103,7 +103,7 @@ export default function Home() {
           </div>
 
           {/* Content area for the image - now scales dynamically to avoid scrolling */}
-          <div className="flex-1 flex flex-col overflow-hidden px-8 pt-8 pb-4 relative">
+          <div className="flex-1 flex flex-col lg:overflow-hidden px-8 pt-8 pb-4 relative min-h-[400px] lg:min-h-0">
             {!imageUrl ? (
               <div className="flex-1 flex items-center justify-center py-4">
                 <FileUploader onFileSelect={handleUploadFile} isUploading={isUploading} />
@@ -119,7 +119,7 @@ export default function Home() {
                     className={`h-full w-full object-contain transition-all duration-700 ease-out ${isUploading ? 'opacity-40 scale-[0.96] blur-sm' : 'opacity-100 scale-100'
                       }`}
                   />
-                  
+
                   {isUploading && (
                     <div className="absolute inset-0 flex items-center justify-center bg-background/20 backdrop-blur-sm z-10 pointer-events-none">
                       <div className="flex flex-col items-center gap-4">
@@ -130,7 +130,7 @@ export default function Home() {
                           </div>
                         </div>
                         <span className="text-foreground text-sm font-bold tracking-tight px-4 py-2 bg-background/50 backdrop-blur-xl rounded-lg border border-border shadow-xl">
-                          Uploading to Vercel...
+                          Uploading screenshot...
                         </span>
                       </div>
                     </div>
@@ -194,7 +194,7 @@ export default function Home() {
         </section>
 
         {/* Right Column: Markdown Output */}
-        <section className="flex-[2] h-full overflow-hidden min-h-[400px]">
+        <section className="flex-1 lg:flex-[2] lg:h-full lg:overflow-hidden min-h-[500px]">
           <MarkdownPreview
             content={completion}
             isLoading={isLoading || isUploading}
