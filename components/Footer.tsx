@@ -1,6 +1,6 @@
 export default function Footer() {
   return (
-    <footer className="shrink-0 py-4 px-8 border-t border-border bg-background transition-colors duration-300">
+    <footer className="shrink-0 py-4 px-8 border-t border-border bg-surface shadow-sm transition-colors duration-300">
       <p className="text-center text-xs text-muted-foreground/60">
         Built by{' '}
         <a

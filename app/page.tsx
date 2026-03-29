@@ -96,8 +96,8 @@ export default function Home() {
 
       <div className="flex-1 w-full max-w-[1400px] mx-auto p-4 md:p-6 lg:p-8 flex flex-col lg:flex-row gap-8 lg:overflow-hidden">
         {/* Left Column: Image / Uploader */}
-        <section className="flex-none lg:flex-1 lg:max-w-md xl:max-w-lg flex flex-col lg:h-full bg-background rounded-xl shadow-sm border border-border lg:overflow-hidden transition-colors duration-300">
-          <div className="px-5 py-3 border-b border-border bg-surface shrink-0">
+        <section className="flex-none lg:flex-1 lg:max-w-md xl:max-w-lg flex flex-col lg:h-full bg-surface rounded-xl shadow-sm border border-border lg:overflow-hidden transition-colors duration-300">
+          <div className="px-5 py-3 border-b border-border bg-surface-dim shrink-0">
             <h2 className="font-semibold text-primary text-sm flex items-center gap-2">
               Image Source
             </h2>
@@ -148,7 +148,7 @@ export default function Home() {
                         setError(null);
                         setStoredImageBase64(null);
                       }}
-                      className="group/btn px-6 py-3 bg-surface/80 hover:bg-surface text-muted-foreground hover:text-foreground text-sm font-semibold rounded-xl transition-all border border-border/60 hover:border-accent/40 shadow-sm hover:shadow-xl active:scale-95 flex items-center gap-3"
+                      className="group/btn px-6 py-3 bg-background hover:bg-surface-dim text-muted-foreground hover:text-foreground text-sm font-semibold rounded-xl transition-all border border-border/60 hover:border-accent/40 shadow-sm hover:shadow-xl active:scale-95 flex items-center gap-3"
                     >
                       <div className="w-1.5 h-1.5 bg-muted-foreground/40 group-hover/btn:bg-accent rounded-full transition-colors" />
                       Upload another screenshot
