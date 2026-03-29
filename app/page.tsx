@@ -162,7 +162,7 @@ export default function Home() {
           <div className="shrink-0 p-8 border-t border-border bg-surface/40 backdrop-blur-md">
             <div className="flex flex-col gap-8">
               <div className="flex flex-col gap-2.5">
-                <label htmlFor="hints" className="text-[10px] font-black uppercase tracking-widest text-muted-foreground/60 px-1 ml-0.5">
+                <label htmlFor="hints" className="text-sm font-semibold text-primary px-1 ml-0.5">
                   Analysis Hints
                 </label>
                 <textarea
