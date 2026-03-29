@@ -1,5 +1,9 @@
-import { StreamTextResult } from 'ai';
+import { streamText } from 'ai';
 
 export interface AIClient {
-  getContextDraftStream(imageUrl: string, imageBase64?: string, analysisHints?: string): StreamTextResult<Record<string, never>, never>;
+  getContextDraftStream(
+    imageUrl: string,
+    imageBase64?: string,
+    analysisHints?: string
+  ): ReturnType<typeof streamText>;
 }
