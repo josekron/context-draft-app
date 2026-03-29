@@ -3,14 +3,14 @@
 :root,
 [data-theme='light'],
 .light {
-  --app-bg: #FFFFFF;
+  --app-bg: #F1F5F9;
   --app-fg: #171717;
   --app-muted: #475569;
   --app-primary: #0F172A;
   --app-accent: #2563EB;
-  --app-surface: #F8FAFC;
-  --app-border: #E2E8F0;
-  --app-hover: #F1F5F9;
+  --app-surface: #FFFFFF;
+  --app-border: #CBD5E1;
+  --app-hover: #E2E8F0;
 }
 
 .dark,
