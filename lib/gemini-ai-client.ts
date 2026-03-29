@@ -53,8 +53,10 @@ export class GeminiAIClient implements AIClient {
       .replace(/\$blobUrl/g, imageUrl)
       .replace(/\{\{USER_INPUT\}\}/g, hints);
 
+    const modelName = process.env.GEMINI_MODEL || 'gemini-3.1-flash-lite-preview';
+
     return streamText({
-      model: google('gemini-3.1-flash-lite-preview'),
+      model: google(modelName),
       maxRetries: 3,
       system: prompt,
       messages: [
