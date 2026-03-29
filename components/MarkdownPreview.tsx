@@ -36,7 +36,7 @@ export default function MarkdownPreview({ content, isLoading, error }: MarkdownP
 
   return (
     <div className="flex flex-col h-full bg-surface rounded-xl shadow-sm border border-border overflow-hidden transition-colors duration-300">
-      <div className="flex items-center justify-between px-5 py-3 border-b border-border bg-surface">
+      <div className="flex items-center justify-between px-5 py-3 border-b border-border bg-surface-dim">
         <div className="font-semibold text-primary text-sm flex items-center gap-2 transition-colors">
           Markdown Output
           {isLoading && (

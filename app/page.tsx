@@ -97,7 +97,7 @@ export default function Home() {
       <div className="flex-1 w-full max-w-[1400px] mx-auto p-4 md:p-6 lg:p-8 flex flex-col lg:flex-row gap-8 lg:overflow-hidden">
         {/* Left Column: Image / Uploader */}
         <section className="flex-none lg:flex-1 lg:max-w-md xl:max-w-lg flex flex-col lg:h-full bg-surface rounded-xl shadow-sm border border-border lg:overflow-hidden transition-colors duration-300">
-          <div className="px-5 py-3 border-b border-border bg-surface shrink-0">
+          <div className="px-5 py-3 border-b border-border bg-surface-dim shrink-0">
             <h2 className="font-semibold text-primary text-sm flex items-center gap-2">
               Image Source
             </h2>
