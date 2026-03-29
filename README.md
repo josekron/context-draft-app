@@ -10,6 +10,7 @@
 GOOGLE_GENERATIVE_AI_API_KEY=your-google-generative-ai-api-key
 GEMINI_MODEL=gemini-3.1-flash-lite-preview
 ```
+3. Deploy to Vercel: create a new project and connect to your github repository. 
 
 ## Getting Started
 
