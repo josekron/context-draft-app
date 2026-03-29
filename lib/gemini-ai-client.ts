@@ -17,10 +17,9 @@ The user may provide extra details below to help your analysis.
 </user_context>
 
 ### OUTPUT RULES:
-1. Always start with the image: ![Reference]($blobUrl)
-2. Follow with the Summary section.
-3. Follow with the Category-Specific sections. Do not display the category name.
-4. Follow with the Tags section with specific tags for Obsidian.
+1. Start with the Summary section.
+2. Follow with the Category-Specific sections. Do not display the category name.
+3. Follow with the Tags section with specific tags for Obsidian.
 
 ### CATEGORY SPECIFICATIONS:
 - If TERMINAL: Sections must be [Command Breakdown, Links to docs (for each command breakdown), Next Steps].
@@ -30,9 +29,10 @@ The user may provide extra details below to help your analysis.
 Analyze the image using the provided context as a guide. Provide the output as an Obsidian note.`;
 
 export class GeminiAIClient implements AIClient {
-  getContextDraftStream(imageUrl: string, imageBase64?: string, analysisHints?: string) {
+  getContextDraftStream(imageUrl?: string, imageBase64?: string, analysisHints?: string) {
     // Process image payload - ensure we handle base64 if provided
-    let imagePayload: URL | Uint8Array = new URL(imageUrl);
+    let imagePayload: URL | Uint8Array | undefined;
+    
     if (imageBase64) {
       const base64Data = imageBase64.split(',')[1];
       if (base64Data) {
@@ -42,6 +42,16 @@ export class GeminiAIClient implements AIClient {
           imagePayload = Uint8Array.from(atob(base64Data), c => c.charCodeAt(0));
         }
       }
+    } else if (imageUrl) {
+      try {
+        imagePayload = new URL(imageUrl);
+      } catch {
+        // Fallback or ignore if invalid URL
+      }
+    }
+
+    if (!imagePayload) {
+      throw new Error('No valid image data provided for analysis');
     }
 
     // Handle analysis hints with default fallback
@@ -50,7 +60,6 @@ export class GeminiAIClient implements AIClient {
       : "No specific focus requested; perform a general high-fidelity analysis.";
 
     const prompt = SYSTEM_PROMPT_TEMPLATE
-      .replace(/\$blobUrl/g, imageUrl)
       .replace(/\{\{USER_INPUT\}\}/g, hints);
 
     const modelName = process.env.GEMINI_MODEL || 'gemini-3.1-flash-lite-preview';

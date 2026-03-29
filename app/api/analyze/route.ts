@@ -7,8 +7,8 @@ export async function POST(req: Request) {
   try {
     const { imageUrl, imageBase64, analysisHints } = await req.json();
 
-    if (!imageUrl) {
-      return NextResponse.json({ error: 'imageUrl is required' }, { status: 400 });
+    if (!imageUrl && !imageBase64) {
+      return NextResponse.json({ error: 'Image data (imageUrl or imageBase64) is required' }, { status: 400 });
     }
 
     const result = await aiClient.getContextDraftStream(imageUrl, imageBase64, analysisHints);
