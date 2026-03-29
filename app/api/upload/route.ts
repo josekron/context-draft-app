@@ -1,6 +1,10 @@
 import { put } from '@vercel/blob';
 import { NextResponse } from 'next/server';
 
+/**
+ * Uploads a file to Vercel Blob. 
+ * Note: This endpoint is not currently used in the current implementation.
+ */
 export async function POST(request: Request): Promise<NextResponse> {
   const { searchParams } = new URL(request.url);
   const filename = searchParams.get('filename');
