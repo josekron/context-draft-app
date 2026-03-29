@@ -148,7 +148,7 @@ export default function Home() {
                         setError(null);
                         setStoredImageBase64(null);
                       }}
-                      className="group/btn px-6 py-3 bg-surface/80 hover:bg-surface text-muted-foreground hover:text-foreground text-sm font-semibold rounded-xl transition-all border border-border/60 hover:border-accent/40 shadow-sm hover:shadow-xl active:scale-95 flex items-center gap-3"
+                      className="group/btn px-6 py-3 bg-background hover:bg-surface-dim text-muted-foreground hover:text-foreground text-sm font-semibold rounded-xl transition-all border border-border/60 hover:border-accent/40 shadow-sm hover:shadow-xl active:scale-95 flex items-center gap-3"
                     >
                       <div className="w-1.5 h-1.5 bg-muted-foreground/40 group-hover/btn:bg-accent rounded-full transition-colors" />
                       Upload another screenshot
