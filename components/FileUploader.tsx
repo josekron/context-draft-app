@@ -46,7 +46,7 @@ export default function FileUploader({ onFileSelect, isUploading }: FileUploader
 
   return (
     <div
-      className={`border-2 border-dashed rounded-xl p-12 text-center transition-all duration-200 ${
+      className={`border-2 border-dashed rounded-xl p-4 text-center transition-all duration-200 ${
         isDragging
           ? 'border-accent bg-accent/5 scale-[1.02]'
           : 'border-border hover:border-accent bg-surface'
@@ -69,7 +69,7 @@ export default function FileUploader({ onFileSelect, isUploading }: FileUploader
           className={`mb-4 transition-colors ${isDragging ? 'text-accent' : 'text-muted'}`}
         />
         <p className="text-lg font-medium text-primary mb-1">
-          Drag & drop your screenshot here
+          Drag & drop your screenshot
         </p>
         <p className="text-sm text-muted">
           or click to browse from your computer

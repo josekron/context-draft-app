@@ -103,9 +103,9 @@ export default function Home() {
           </div>
 
           {/* Content area for the image - now scales dynamically to avoid scrolling */}
-          <div className="flex-1 flex flex-col lg:overflow-hidden px-8 pt-8 pb-4 relative min-h-[400px] lg:min-h-0">
+          <div className="flex-1 flex flex-col lg:overflow-hidden px-8 pt-4 pb-4 relative min-h-[400px] lg:min-h-0">
             {!imageUrl ? (
-              <div className="flex-1 flex items-center justify-center py-4">
+              <div className="flex-1 flex items-center justify-center py-1">
                 <FileUploader onFileSelect={handleUploadFile} isUploading={isUploading} />
               </div>
             ) : (
