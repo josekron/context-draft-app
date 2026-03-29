@@ -30,7 +30,7 @@ The user may provide extra details below to help your analysis.
 Analyze the image using the provided context as a guide. Provide the output as an Obsidian note.`;
 
 export class GeminiAIClient implements AIClient {
-  getContextDraftStream(imageUrl: string, imageBase64?: string) {
+  getContextDraftStream(imageUrl: string, imageBase64?: string, analysisHints?: string) {
     // Process image payload - ensure we handle base64 if provided
     let imagePayload: URL | Uint8Array = new URL(imageUrl);
     if (imageBase64) {
@@ -44,7 +44,14 @@ export class GeminiAIClient implements AIClient {
       }
     }
 
-    const prompt = SYSTEM_PROMPT_TEMPLATE.replace(/\$blobUrl/g, imageUrl);
+    // Handle analysis hints with default fallback
+    const hints = analysisHints?.trim()
+      ? analysisHints
+      : "No specific focus requested; perform a general high-fidelity analysis.";
+
+    const prompt = SYSTEM_PROMPT_TEMPLATE
+      .replace(/\$blobUrl/g, imageUrl)
+      .replace(/\{\{USER_INPUT\}\}/g, hints);
 
     return streamText({
       model: google('gemini-3.1-flash-lite-preview'),

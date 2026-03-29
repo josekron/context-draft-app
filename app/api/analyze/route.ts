@@ -5,13 +5,13 @@ const aiClient = new GeminiAIClient();
 
 export async function POST(req: Request) {
   try {
-    const { imageUrl, imageBase64 } = await req.json();
+    const { imageUrl, imageBase64, analysisHints } = await req.json();
 
     if (!imageUrl) {
       return NextResponse.json({ error: 'imageUrl is required' }, { status: 400 });
     }
 
-    const result = await aiClient.getContextDraftStream(imageUrl, imageBase64);
+    const result = await aiClient.getContextDraftStream(imageUrl, imageBase64, analysisHints);
     return result.toTextStreamResponse();
   } catch (error) {
     console.error('Caught Error in Route:', error);
