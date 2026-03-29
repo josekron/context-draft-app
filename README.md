@@ -4,9 +4,9 @@
 
 ## Screenshots
 
-![Dark Mode](public/screenshot_1_dark_mode.png)
+![Dark Mode](./screenshot_1_dark_mode.png)
 
-![Light Mode](public/screenshot_1_light_mode.png)
+![Light Mode](./screenshot_1_light_mode.png)
 
 ## Setup
 
