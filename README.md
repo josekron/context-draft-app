@@ -2,6 +2,12 @@
 
 **Context Draft** that transforms technical screenshots into structured, product-aware Obsidian Markdown notes.
 
+## Screenshots
+
+![Dark Mode](public/screenshot_1_dark_mode.png)
+
+![Light Mode](public/screenshot_1_light_mode.png)
+
 ## Setup
 
 1. Create a .env.local file in the root of the project
