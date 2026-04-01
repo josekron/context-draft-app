@@ -1,6 +1,6 @@
 ## Description
 
-**Context Draft** that transforms technical screenshots into structured, product-aware Obsidian Markdown notes.
+**Context Draft** transforms technical screenshots into structured, product-aware Obsidian Markdown notes.
 
 ## Screenshots
 
