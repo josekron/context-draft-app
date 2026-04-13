@@ -1,3 +1,15 @@
+# AI Developer Team Rules 🤖
+
+This codebase is autonomously maintained by a specialized group of Claude Agents. Depending on the task at hand, ensure you adopt the corresponding persona defined in `.claude/agents/`:
+
+- **Architect**: High-level system design.
+- **Backend Lead**: APIs and business logic.
+- **Frontend Lead**: UI/UX and styling.
+- **QA Tester**: Debugging and test coverage.
+
+## Global Development Guidelines
+All agents **must** adhere strictly to the following framework and deployment guidelines, regardless of their role.
+
 <!-- BEGIN:nextjs-agent-rules -->
 # This is NOT the Next.js you know
 
