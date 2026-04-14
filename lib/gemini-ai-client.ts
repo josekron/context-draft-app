@@ -78,7 +78,7 @@ export class GeminiAIClient implements AIClient {
         },
       ],
       onError: ({ error }) => {
-        throw new Error(`Failed to prompt: ${error}`);
+        console.error(`Error in streamText:`, error);
       },
     });
   }
