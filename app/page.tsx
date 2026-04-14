@@ -7,7 +7,7 @@ import ErrorTopBar from '@/components/ErrorTopBar';
 import FileUploader from '@/components/FileUploader';
 import MarkdownPreview from '@/components/MarkdownPreview';
 import Footer from '@/components/Footer';
-import { randomizeFilename } from '@/lib/utils';
+import { normalizeErrorMessage, randomizeFilename } from '@/lib/utils';
 import { Zap } from 'lucide-react';
 
 export default function Home() {
@@ -22,12 +22,7 @@ export default function Home() {
     streamProtocol: 'text',
     onError: (err) => {
       console.error(`Error analyzing image:`, err);
-      let errorMessage = err.message;
-      if (errorMessage.includes('<!DOCTYPE html>') || errorMessage.includes('<html')) {
-        errorMessage = "An unexpected server error occurred (possibly high demand on the AI service). Please try again later.";
-      } else if (errorMessage.includes('Failed to fetch')) {
-        errorMessage = "Failed to communicate with the server. Please check your connection.";
-      }
+      const errorMessage = normalizeErrorMessage(err);
       setError(errorMessage);
       setIsUploading(false);
     },
@@ -90,12 +85,17 @@ export default function Home() {
   const handleStartAnalysis = async () => {
     if (!imageUrl) return;
     setError(null);
+    setCompletion('');
     try {
-      await complete('', { body: { imageUrl, imageBase64: storedImageBase64, analysisHints } });
+      const result = await complete('', { body: { imageUrl, imageBase64: storedImageBase64, analysisHints } });
+      if (!result?.trim()) {
+        setError('Gemini is currently unavailable. Please try again in a moment.');
+      }
     } catch (err) {
-      // The error is already handled by the onError callback in useCompletion.
-      // We catch it here to prevent Next.js from throwing an unhandled rejection overlay.
+      // Keep a fallback here in case onError does not fire in edge cases.
       console.error('Analysis failed:', err);
+      setError(normalizeErrorMessage(err));
+      setIsUploading(false);
     }
   };
 

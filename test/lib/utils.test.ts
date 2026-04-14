@@ -1,5 +1,5 @@
 import { describe, test, expect } from 'vitest';
-import { randomizeFilename } from '../../lib/utils';
+import { normalizeErrorMessage, randomizeFilename } from '../../lib/utils';
 
 /**
  * Test cases for filename randomization.
@@ -46,5 +46,32 @@ describe('randomizeFilename', () => {
     const result2 = randomizeFilename(filename);
     
     expect(result1).not.toBe(result2);
+  });
+});
+
+describe('normalizeErrorMessage', () => {
+  test('returns Gemini unavailable for JSON error code != 200', () => {
+    const result = normalizeErrorMessage(JSON.stringify({ code: 503, error: 'provider error' }));
+    expect(result).toBe('Gemini is currently unavailable. Please try again in a moment.');
+  });
+
+  test('returns Gemini unavailable for JSON status != 200', () => {
+    const result = normalizeErrorMessage(JSON.stringify({ status: 500 }));
+    expect(result).toBe('Gemini is currently unavailable. Please try again in a moment.');
+  });
+
+  test('returns Gemini unavailable for object statusCode != 200', () => {
+    const result = normalizeErrorMessage({ statusCode: 503, message: 'Retry exhausted' });
+    expect(result).toBe('Gemini is currently unavailable. Please try again in a moment.');
+  });
+
+  test('returns raw message when code is 200', () => {
+    const result = normalizeErrorMessage(JSON.stringify({ code: 200, message: 'ok-ish but no output' }));
+    expect(result).toBe('{"code":200,"message":"ok-ish but no output"}');
+  });
+
+  test('returns fallback when message is empty', () => {
+    const result = normalizeErrorMessage('');
+    expect(result).toBe('An unexpected error occurred while analyzing the screenshot. Please try again.');
   });
 });
