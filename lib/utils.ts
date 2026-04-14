@@ -25,3 +25,41 @@ export function randomizeFilename(filename: string): string {
   
   return `${name}-${uuid}${extension}`;
 }
+
+/**
+ * Normalizes analysis errors into user-facing messages.
+ * Primary rule: if a parsed error code is not 200, return Gemini unavailable message.
+ */
+export function normalizeErrorMessage(input: unknown): string {
+  const fallback = 'An unexpected error occurred while analyzing the screenshot. Please try again.';
+  const unavailableFallback = 'Gemini is currently unavailable. Please try again in a moment.';
+  const rawMessage = typeof input === 'string'
+    ? input
+    : input instanceof Error
+      ? input.message
+      : input && typeof input === 'object' && 'message' in input && typeof input.message === 'string'
+        ? input.message
+        : '';
+
+  try {
+    const parsed = JSON.parse(rawMessage) as { code?: number; status?: number };
+    const code = typeof parsed.code === 'number' ? parsed.code : parsed.status;
+    if (typeof code === 'number' && code !== 200) {
+      return unavailableFallback;
+    }
+  } catch {
+    // Ignore parse errors and continue with fallback handling.
+  }
+
+  if (
+    input &&
+    typeof input === 'object' &&
+    'statusCode' in input &&
+    typeof input.statusCode === 'number' &&
+    input.statusCode !== 200
+  ) {
+    return unavailableFallback;
+  }
+
+  return rawMessage.trim() || fallback;
+}
