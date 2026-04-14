@@ -21,8 +21,14 @@ export default function Home() {
     api: '/api/analyze',
     streamProtocol: 'text',
     onError: (err) => {
-      console.error(`Error analyzing image: ${err.message}`)
-      setError(err.message.includes('Failed to fetch') ? 'Failed to analyze the image.' : err.message);
+      console.error(`Error analyzing image:`, err);
+      let errorMessage = err.message;
+      if (errorMessage.includes('<!DOCTYPE html>') || errorMessage.includes('<html')) {
+        errorMessage = "An unexpected server error occurred (possibly high demand on the AI service). Please try again later.";
+      } else if (errorMessage.includes('Failed to fetch')) {
+        errorMessage = "Failed to communicate with the server. Please check your connection.";
+      }
+      setError(errorMessage);
       setIsUploading(false);
     },
   });
