@@ -21,7 +21,7 @@ export default function Home() {
     api: '/api/analyze',
     streamProtocol: 'text',
     onError: (err) => {
-      console.log(`Error analyzing image: ${err.message}`)
+      console.error(`Error analyzing image: ${err.message}`)
       setError(err.message.includes('Failed to fetch') ? 'Failed to analyze the image.' : err.message);
       setIsUploading(false);
     },
@@ -47,7 +47,6 @@ export default function Home() {
 
       // Upload to Vercel Blob via our endpoint
       const newFilename = randomizeFilename(file.name);
-      console.log(`Uploading file: ${newFilename}`);
 
       const response = await fetch(`/api/upload?filename=${encodeURIComponent(newFilename)}`, {
         method: 'POST',
@@ -69,7 +68,6 @@ export default function Home() {
       }
 
       const blobData = await response.json();
-      console.log('Upload successful:', blobData.url);
 
       // Store data for manual analysis trigger
       setImageUrl(blobData.url);
@@ -86,7 +84,13 @@ export default function Home() {
   const handleStartAnalysis = async () => {
     if (!imageUrl) return;
     setError(null);
-    await complete('', { body: { imageUrl, imageBase64: storedImageBase64, analysisHints } });
+    try {
+      await complete('', { body: { imageUrl, imageBase64: storedImageBase64, analysisHints } });
+    } catch (err) {
+      // The error is already handled by the onError callback in useCompletion.
+      // We catch it here to prevent Next.js from throwing an unhandled rejection overlay.
+      console.error('Analysis failed:', err);
+    }
   };
 
   return (
