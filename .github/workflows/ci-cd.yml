@@ -30,9 +30,10 @@ jobs:
           cache: pnpm
 
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
-        env:
-          PNPM_ONLY_BUILT_DEPENDENCIES: "sharp,unrs-resolver"
+        run: |
+          pnpm config set only-built-dependencies sharp,unrs-resolver
+          pnpm install --frozen-lockfile
+
 
       - name: Type check
         run: pnpm exec tsc --noEmit
@@ -76,9 +77,10 @@ jobs:
         run: pnpm add -g vercel
 
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
-        env:
-          PNPM_ONLY_BUILT_DEPENDENCIES: "sharp,unrs-resolver"
+        run: |
+          pnpm config set only-built-dependencies sharp,unrs-resolver
+          pnpm install --frozen-lockfile
+
 
       - name: Pull Vercel environment
         run: pnpm exec vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
