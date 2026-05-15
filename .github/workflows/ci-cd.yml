@@ -30,10 +30,7 @@ jobs:
           cache: pnpm
 
       - name: Install dependencies
-        run: |
-          echo "only-built-dependencies[]=sharp" > .npmrc
-          echo "only-built-dependencies[]=unrs-resolver" >> .npmrc
-          pnpm install --frozen-lockfile
+        run: pnpm install --frozen-lockfile
 
 
       - name: Type check
@@ -78,10 +75,7 @@ jobs:
         run: pnpm add -g vercel
 
       - name: Install dependencies
-        run: |
-          echo "only-built-dependencies[]=sharp" > .npmrc
-          echo "only-built-dependencies[]=unrs-resolver" >> .npmrc
-          pnpm install --frozen-lockfile
+        run: pnpm install --frozen-lockfile
 
 
       - name: Pull Vercel environment
