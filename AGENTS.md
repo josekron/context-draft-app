@@ -10,6 +10,13 @@ This codebase is autonomously maintained by a specialized group of Claude Agents
 ## Global Development Guidelines
 All agents **must** adhere strictly to the following framework and deployment guidelines, regardless of their role.
 
+### Version Control & GitHub Workflow
+Because agents operate via the user's terminal, they **inherit the user's GitHub CLI and SSH authorizations**. To maintain a safe repository state, all agents must adhere to these rules before running Git commands:
+1. **Never push directly to the `main` branch.**
+2. **Branching:** Always create a targeted feature branch before modifying files (e.g., `git checkout -b feature/agent-[brief-description]`).
+3. **Commits:** Use [Conventional Commits](https://www.conventionalcommits.org/) (e.g., `feat: build login component`, `fix: header padding validation`).
+4. **Pull Requests:** Upon completion of a task, push your branch (`git push origin <branch-name>`) and generate a Pull Request using the `gh pr create` CLI tool.
+
 <!-- BEGIN:nextjs-agent-rules -->
 # This is NOT the Next.js you know
 
