@@ -31,7 +31,8 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pnpm config set only-built-dependencies sharp,unrs-resolver
+          echo "only-built-dependencies[]=sharp" > .npmrc
+          echo "only-built-dependencies[]=unrs-resolver" >> .npmrc
           pnpm install --frozen-lockfile
 
 
@@ -78,7 +79,8 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pnpm config set only-built-dependencies sharp,unrs-resolver
+          echo "only-built-dependencies[]=sharp" > .npmrc
+          echo "only-built-dependencies[]=unrs-resolver" >> .npmrc
           pnpm install --frozen-lockfile
 
 
